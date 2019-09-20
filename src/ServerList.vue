@@ -11,6 +11,7 @@
 
 <script>
   import Server from "./Server.vue";
+  import { eventBus } from "./main";
 
   export default {
     props: {
