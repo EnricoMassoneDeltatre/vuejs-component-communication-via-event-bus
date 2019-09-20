@@ -42,6 +42,8 @@
         const newServerStatus = event.target.value;
         const { id: serverId } = this.server;
 
+        this.server.status = newServerStatus;
+
         eventBus.$emit("serverStatusChanged", {
           serverId,
           status: newServerStatus

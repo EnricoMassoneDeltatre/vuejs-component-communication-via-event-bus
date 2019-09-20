@@ -38,6 +38,23 @@
       }
     },
 
+    created() {
+      eventBus.$on("serverStatusChanged", eventData => {
+        const {serverId, status: updatedStatus} = eventData;
+        
+        this.servers = this.servers.map(server => {
+          if (server.id === serverId) {
+            return {
+              id: server.id,
+              status: updatedStatus
+            };
+          } else {
+            return server;
+          }
+        });
+      });
+    },
+
     components: {
       "my-server": Server
     }
