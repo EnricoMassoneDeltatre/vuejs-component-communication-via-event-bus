@@ -27,10 +27,13 @@
 </template>
 
 <script>
+  import { eventBus } from "./main";
+
   export default {
     data: function() {
       return {
-        statuses: ["Normal", "Degraded", "Critical"]
+        statuses: ["Normal", "Degraded", "Critical"],
+        server: null
       };
     },
 
@@ -39,15 +42,17 @@
         const newServerStatus = event.target.value;
         const { id: serverId } = this.server;
 
-        this.$emit("serverStatusChanged", {
+        eventBus.$emit("serverStatusChanged", {
           serverId,
           status: newServerStatus
         });
       }
     },
 
-    props: {
-      server: Object
+    created() {
+      eventBus.$on("serverSelected", selectedServer => {
+        this.server = selectedServer;
+      });
     }
   }
 </script>
