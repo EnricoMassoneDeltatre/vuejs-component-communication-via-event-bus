@@ -1,7 +1,6 @@
 <template>
   <li 
     class="list-group-item"
-    @click="serverSelected"
     :class="{
       'list-group-item-warning': server.status === 'Degraded',
       'list-group-item-danger': server.status === 'Critical',
@@ -17,12 +16,6 @@
       server: {
         type: Object,
         required: true
-      }
-    },
-
-    methods: {
-      serverSelected() {
-        this.$emit("serverSelected", this.server.id);
       }
     }
   }
