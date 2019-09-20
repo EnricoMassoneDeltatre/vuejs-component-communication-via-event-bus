@@ -1,11 +1,7 @@
 <template>
   <div class="row">
       <div class="col-xs-12 col-sm-6">
-          <my-server-list 
-            :servers="servers"
-            @selectedServerChanged="onSelectedServerChanged">
-
-          </my-server-list>
+          <my-server-list ></my-server-list>
       </div>
       <div class="col-xs-12 col-sm-6">
           <my-server-details 
@@ -24,27 +20,11 @@
   export default {
     data: function() {
       return {
-        selectedServer: null,
-        servers: [
-          { id: 1, status: "Normal" },
-          { id: 2, status: "Critical" },
-          { id: 3, status: "Degraded" },
-          { id: 4, status: "Critical" },
-          { id: 5, status: "Normal" }
-        ]
+        selectedServer: null
       }
     },
 
     methods: {
-      onSelectedServerChanged(eventData) {
-        const selectedServer = this.servers.find(server => server.id === eventData);
-        if (!selectedServer) {
-          throw new Error(`Unable to find a server having id ${eventData}`);
-        }
-
-        this.selectedServer = selectedServer;
-      },
-
       onServerStatusChanged(eventData) {
         const {serverId, status: updatedStatus} = eventData;
         
